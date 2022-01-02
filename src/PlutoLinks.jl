@@ -2,6 +2,6 @@ module PlutoLinks
 
 include("./notebook.jl")
 
-export @file_watching, @background, @ingredients
+export @use_file, @use_task, @ingredients
 
 end
