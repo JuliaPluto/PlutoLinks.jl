@@ -13,4 +13,5 @@ UUIDs = "cf7118a7-6976-5b1a-9a39-7adc72f591a4"
 
 [compat]
 PlutoHooks = "~0.0.1"
+Revise = "3.3.0"
 julia = "1.6"
