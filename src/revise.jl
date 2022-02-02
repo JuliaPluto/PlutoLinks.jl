@@ -14,14 +14,12 @@ The `@revise` is a way to use a package watched by Revise. The cell from which `
 
  - The revised package should be developed in the current environment, usually requiring you to [opt out of the Pluto package manager](https://github.com/fonsp/Pluto.jl/wiki/%F0%9F%8E%81-Package-management#advanced-set-up-an-environment-with-pkgactivate).
 
- - `Revise` should be loaded with PlutoLinks for this macro to be defined.
-
 ---
 Examples
 
 ```julia
 # in one cell
-using Revise, PlutoLinks
+using PlutoLinks
 
 # in another cell
 @revise using MyPackage
