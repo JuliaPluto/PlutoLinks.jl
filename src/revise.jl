@@ -7,6 +7,10 @@ using InteractiveUtils
 # ╔═╡ 98e662cc-8407-11ec-29f9-1dcf48b4d326
 import PlutoHooks, Revise
 
+# ╔═╡ db73b8ec-893b-4a80-8170-4223c7164e78
+# PlutoLinks is defined in terms of itself
+import PlutoLinks
+
 # ╔═╡ 5d3b18ce-e0e9-4fec-b370-1a80672ea800
 """
 
@@ -39,15 +43,17 @@ macro revise(using_)
     quote
         $(esc(using_))
 
-		# let block might be important to prevent Pluto from setting the callback
-		# to nothing when jumping to a new workspace
-        let
-            _, rerun = @PlutoHooks.use_state(nothing)
-            @PlutoHooks.use_task([]) do
-                Revise.entr(() -> rerun(nothing),
-					[], [$(esc(mod))]; all=false, postpone=true)
-            end
-        end
+		if @PlutoHooks.use_is_pluto_cell()
+			# let block might be important to prevent Pluto from setting the callback
+			# to nothing when jumping to a new workspace
+	        let
+	            _, rerun = @PlutoHooks.use_state(nothing)
+	            @PlutoLinks.use_task([]) do
+	                Revise.entr(() -> rerun(nothing),
+						[], [$(esc(mod))]; all=false, postpone=true)
+	            end
+	        end
+		end
 
 		nothing
     end
@@ -57,10 +63,12 @@ end
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
 PlutoHooks = "0ff47ea0-7a50-410d-8455-4348d5de0774"
+PlutoLinks = "0ff47ea0-7a50-410d-8455-4348d5de0420"
 Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
 
 [compat]
 PlutoHooks = "~0.0.3"
+PlutoLinks = "~0.1.2"
 Revise = "~3.3.1"
 """
 
@@ -168,6 +176,12 @@ git-tree-sha1 = "f297787f7d7507dada25f6769fe3f08f6b9b8b12"
 uuid = "0ff47ea0-7a50-410d-8455-4348d5de0774"
 version = "0.0.3"
 
+[[deps.PlutoLinks]]
+deps = ["FileWatching", "InteractiveUtils", "Markdown", "PlutoHooks", "Revise", "UUIDs"]
+git-tree-sha1 = "c9d92822ea27c1453d3615bae44481859296fe31"
+uuid = "0ff47ea0-7a50-410d-8455-4348d5de0420"
+version = "0.1.2"
+
 [[deps.Printf]]
 deps = ["Unicode"]
 uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
@@ -231,6 +245,7 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 
 # ╔═╡ Cell order:
 # ╠═98e662cc-8407-11ec-29f9-1dcf48b4d326
+# ╠═db73b8ec-893b-4a80-8170-4223c7164e78
 # ╠═5d3b18ce-e0e9-4fec-b370-1a80672ea800
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
