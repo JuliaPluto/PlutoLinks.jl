@@ -186,19 +186,19 @@ end
 """
 macro use_debounce(f, deps, timeout)
 	quote
-		ref, set_ref = @use_state(nothing)
+		value, set_value = @use_state(nothing)
 		count_ref = @use_ref(0)
 
-		count_ref.x += 1
+		count_ref[] += 1
 		task = Task(function()
-			count_copy = deepcopy(count_ref.x)
+			count_copy = deepcopy(count_ref[])
 			sleep($timeout)
-			if count_copy == count_ref.x
-				set_ref($(esc(f))())
+			if count_copy == count_ref[]
+				set_value($(esc(f))())
 			end
 		end)
 		schedule(task)
-		ref	
+		value
 	end
 end
 
