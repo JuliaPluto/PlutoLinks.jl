@@ -13,12 +13,12 @@ $(readme)
 
 #### Documentation
 
- - [`@revise`](./revise.jl)
+ - [`@revise`](./revise)
 
 #### Source code
 
- - [`@revise`](../src/revise.jl)
- - [Other hooks](../src/notebook.jl)
+ - [`@revise`](../src/revise)
+ - [Other hooks](../src/notebook)
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
