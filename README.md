@@ -1,5 +1,7 @@
 # PlutoLinks.jl
 
+[![](https://img.shields.io/badge/docs-stable-blue.svg)](https://juliapluto.github.io/PlutoLinks.jl/docs/index.html)
+
 This package contains a set of utilities built using [PlutoHooks.jl](https://github.com/JuliaPluto/PlutoHooks.jl).
 
 - `@revise`: Watch a local package and update the cell when the package source changes.
