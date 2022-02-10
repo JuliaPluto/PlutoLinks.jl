@@ -173,35 +173,6 @@ macro ingredients(filename)
 	end
 end
 
-# ╔═╡ 36a67c48-f398-4ec1-9f01-b33d647137ee
-"""
-Run a code block using debounce, i.e. only run it when variable list has stabilized through `timeout`.
-
-```julia
-@use_debounce([var], 1) do
-	sleep(2.)
-	@info "stable variable \$var"
-end
-```
-"""
-macro use_debounce(f, deps, timeout)
-	quote
-		value, set_value = @use_state(nothing)
-		count_ref = @use_ref(0)
-
-		count_ref[] += 1
-		task = Task(function()
-			count_copy = deepcopy(count_ref[])
-			sleep($timeout)
-			if count_copy == count_ref[]
-				set_value($(esc(f))())
-			end
-		end)
-		schedule(task)
-		value
-	end
-end
-
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
@@ -266,6 +237,5 @@ uuid = "cf7118a7-6976-5b1a-9a39-7adc72f591a4"
 # ╠═2ae53102-c6f8-4f84-8020-e3b28425240f
 # ╠═480dd46c-cc31-46b5-bc2d-2e1680d5c682
 # ╠═d84f47ba-7c18-4d6c-952c-c9a5748a51f8
-# ╠═36a67c48-f398-4ec1-9f01-b33d647137ee
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
