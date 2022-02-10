@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.17.1
+# v0.17.7
 
 using Markdown
 using InteractiveUtils
@@ -209,7 +209,7 @@ uuid = "0ff47ea0-7a50-410d-8455-4348d5de0774"
 version = "0.0.3"
 
 [[Random]]
-deps = ["Serialization"]
+deps = ["SHA", "Serialization"]
 uuid = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 
 [[SHA]]
