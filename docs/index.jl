@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.18.0
+# v0.18.1
 
 using Markdown
 using InteractiveUtils
@@ -14,6 +14,7 @@ $(readme)
 #### Documentation
 
  - [`@revise`](./revise)
+ - [`@use_task`](./use_task)
 
 #### Source code
 

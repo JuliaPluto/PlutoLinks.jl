@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.17.7
+# v0.18.1
 
 using Markdown
 using InteractiveUtils
@@ -145,30 +145,17 @@ end
 Watch a Julia source file and loads its content as a module. The loaded module is then reloaded automatically whenever the file changes.
 
 ```julia
-begin
-	MyModule = @ingredients("my_exported_function.jl")
-	using .MyModule # Optional, to not have to qualify every call with MyModule.xxx
-end
+MyModule = @ingredients("my_exported_function.jl")
 ```
-
-⚠ The macro currently stops watching when there is a syntax error so you may need to re-run the cell manually to re-trigger file watching.
-
 """
 macro ingredients(filename)
 	quote
-		filename = $(esc(filename))
-
-		@use_deps([filename]) do
-			mod, set_mod = @use_state(ingredients(filename))
-
-			@use_task([]) do
-				while true
-					watch_file(filename)
-					set_mod(ingredients(filename))
-				end
+		let
+			filename = $(esc(filename))
+			update_time = @use_file_change(filename)
+			@use_memo([update_time]) do
+				ingredients(filename)
 			end
-	
-			mod
 		end
 	end
 end
