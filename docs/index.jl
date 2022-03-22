@@ -32,8 +32,13 @@ end;
 
 # ╔═╡ 3e715447-312c-4c5f-85a3-96abbb91fc0c
 sources = let
-	files = map(f -> " - [`$(hook_name(f))`](./$f)",
-		filter(!=("PlutoLinks.jl") ∘ basename, readdir("../src"))) |> s -> join(s, "\n") |> Markdown.parse
+	files = map(
+		f -> " - [`$(hook_name(f))`](./$(hook_link(f)))",
+		filter(
+			path -> basename(path) != "PlutoLinks.jl" && endswith(path, ".jl"),
+			readdir("../src")
+		)
+	) |> s -> join(s, "\n") |> Markdown.parse
 
 	md"""
 	#### Source code
@@ -67,8 +72,8 @@ manifest_format = "2.0"
 # ╔═╡ Cell order:
 # ╟─2175e675-df15-4934-b410-d0def1decf04
 # ╟─11c144eb-60b4-4a64-8077-29e97abedce8
-# ╟─bdf53020-635d-4cc9-8a0e-a612ca470e85
 # ╟─3e715447-312c-4c5f-85a3-96abbb91fc0c
+# ╟─bdf53020-635d-4cc9-8a0e-a612ca470e85
 # ╟─7c852ed0-36b8-43ea-8ee8-c4bd45e9c8a9
 # ╟─d974bcaa-935e-4a8c-bfc8-827034e79efe
 # ╟─00000000-0000-0000-0000-000000000001
