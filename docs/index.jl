@@ -33,7 +33,7 @@ end;
 # ╔═╡ 3e715447-312c-4c5f-85a3-96abbb91fc0c
 sources = let
 	files = map(
-		f -> " - [`$(hook_name(f))`](./$(hook_link(f)))",
+		f -> " - [`$(hook_name(f))`](../src/$(hook_link(f)))",
 		filter(
 			path -> basename(path) != "PlutoLinks.jl" && endswith(path, ".jl"),
 			readdir("../src")
