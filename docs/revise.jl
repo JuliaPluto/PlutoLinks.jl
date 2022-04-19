@@ -22,6 +22,8 @@ Here is an example workflow of editing a package in another editor and testing i
 
 ![Example of using the `@revise` macro](https://user-images.githubusercontent.com/9824244/152143460-798ea60c-a3ec-446f-ba12-c11b513281fe.gif)
 
+In order to include a single file, the [`@ingredients`](./ingredients/) macro can be used instead.
+
 ### Working on tests
 
 For example, to use this hook to work on tests, the following code can be used.

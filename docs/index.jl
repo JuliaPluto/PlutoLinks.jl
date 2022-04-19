@@ -1,8 +1,13 @@
 ### A Pluto.jl notebook ###
-# v0.18.4
+# v0.19.0
 
 using Markdown
 using InteractiveUtils
+
+# ╔═╡ 9ec6149e-6acd-414c-8902-798771573672
+function is_notebook(p)
+	startswith(read(p, String), "### A Pluto")
+end;
 
 # ╔═╡ bdf53020-635d-4cc9-8a0e-a612ca470e85
 hook_link(p) = replace(p, ".jl" => ".html");
@@ -18,7 +23,7 @@ docs = let
 	files = map(
 		f -> " - [`$(hook_name(f))`](./$(hook_link(f)))",
 		filter(
-			name -> basename(name) != "index.jl" && endswith(name, ".jl"),
+			name -> basename(name) != "index.jl" && endswith(name, ".jl") && is_notebook(name),
 			readdir("./")
 		)
 	) |> s -> join(s, "\n") |> Markdown.parse
@@ -63,7 +68,7 @@ PLUTO_PROJECT_TOML_CONTENTS = """
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.7.2"
+julia_version = "1.7.1"
 manifest_format = "2.0"
 
 [deps]
@@ -71,6 +76,7 @@ manifest_format = "2.0"
 
 # ╔═╡ Cell order:
 # ╟─2175e675-df15-4934-b410-d0def1decf04
+# ╟─9ec6149e-6acd-414c-8902-798771573672
 # ╟─11c144eb-60b4-4a64-8077-29e97abedce8
 # ╟─3e715447-312c-4c5f-85a3-96abbb91fc0c
 # ╟─bdf53020-635d-4cc9-8a0e-a612ca470e85
