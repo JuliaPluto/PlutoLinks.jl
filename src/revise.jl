@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.17.7
+# v0.19.3
 
 using Markdown
 using InteractiveUtils
@@ -14,7 +14,7 @@ import PlutoLinks
 # ╔═╡ 5d3b18ce-e0e9-4fec-b370-1a80672ea800
 """
 
-The `@revise` is a way to use a package watched by Revise. The cell from which `@revise` is called will be re-run whenever the package definition changes. This means that cells depending on this package will be updated as well.
+The `@revise` macro imports a package watched by Revise. The cell from which `@revise` is called will be re-run whenever the package definition changes. This means that cells depending on this package will be updated as well.
 
  - The revised package should be developed in the current environment, usually requiring you to [opt out of the Pluto package manager](https://github.com/fonsp/Pluto.jl/wiki/%F0%9F%8E%81-Package-management#advanced-set-up-an-environment-with-pkgactivate).
 
@@ -76,7 +76,7 @@ Revise = "~3.3.1"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.7.1"
+julia_version = "1.7.2"
 manifest_format = "2.0"
 
 [[deps.ArgTools]]

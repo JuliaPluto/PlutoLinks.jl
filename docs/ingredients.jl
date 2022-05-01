@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.0
+# v0.19.3
 
 using Markdown
 using InteractiveUtils
@@ -75,7 +75,7 @@ PlutoLinks = "~0.1.5"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.7.1"
+julia_version = "1.7.2"
 manifest_format = "2.0"
 
 [[deps.ArgTools]]
@@ -245,7 +245,7 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╔═╡ Cell order:
 # ╟─effcea86-c002-11ec-0226-6d894daa7812
 # ╠═8b06607c-ffb2-47a9-8398-32608cd0a832
-# ╠═3aeaf1b4-5850-4914-8adf-ea001f63d2af
+# ╟─3aeaf1b4-5850-4914-8adf-ea001f63d2af
 # ╠═a4b2c92b-25fe-4137-a8ad-388daa096d20
 # ╟─7e6d4b1b-d89e-47f1-9450-f33ece70c17a
 # ╠═6b5265ba-489f-496b-8bb7-a776987dbed6
