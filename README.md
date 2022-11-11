@@ -10,3 +10,4 @@ This package contains a set of utilities built using [PlutoHooks.jl](https://git
 - `@use_file`: Watch a file and reload the content when it changes.
 - `@ingredients`: Watch a Julia file and automatically run the dependent cells when the code changes.
 - `@use_debounce`: Wait for a variable value to stabilize before updating its output.
+- `@use_process` and `@use_process_output`: to run a process asynchronously and restart it when the calling cell is explicitely run.
