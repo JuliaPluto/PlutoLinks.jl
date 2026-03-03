@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.3
+# v0.20.23
 
 using Markdown
 using InteractiveUtils
@@ -60,6 +60,82 @@ greet("Baz")
 # ╔═╡ bdd2f924-402c-4858-bebb-72c5c20696c0
 md"""
 ---
+"""
+
+# ╔═╡ 738b1f86-b58a-4411-8c6a-c8c61a2f52e4
+md"""
+## Julia Modules
+
+`@ingredients` can load any Julia script reactively — edits to the file automatically trigger re-evaluation of dependent cells, which is the main advantage over a plain `include`.
+
+```julia
+using PlutoLinks: @ingredients
+M = @ingredients "../scripts/MyModule.jl"
+```
+
+### Plain scripts (no `module` wrapper)
+
+Functions defined at the top level of the script are accessible directly via the returned binding:
+
+```julia
+# scripts/MyModule.jl
+function my_func(x)
+    x + 1
+end
+```
+
+```julia
+# Pluto cell 1
+M = @ingredients "../scripts/MyModule.jl"
+```
+
+```julia
+# Pluto cell 2
+M.my_func(1)  # ✅
+```
+
+### Scripts that define a `module`
+
+When the script wraps its content in a `module`, be aware that `@ingredients` wraps the entire script in its own namespace as well, resulting in **double-nesting**:
+
+```julia
+# scripts/MyModule.jl
+module MyModule
+
+export my_func
+
+function my_func(x)
+    x + 1
+end
+
+end # module
+```
+
+```julia
+# Pluto cell 1
+M = @ingredients "../scripts/MyModule.jl"
+```
+
+```julia
+# Pluto cell 2
+M.my_func(1)        # ❌ UndefVarError
+M.MyModule.my_func(1)  # ✅ works, but awkward
+```
+
+The recommended workaround is to alias the inner module right after loading:
+
+```julia
+# Pluto cell 1
+M = @ingredients "../scripts/MyModule.jl"
+const MyModule = M.MyModule
+```
+
+```julia
+# Pluto cell 2
+MyModule.my_func(1)  # ✅
+```
+
+This approach is preferable when the script is shared outside of Pluto or intended to eventually become a registered package, as it preserves the `module` wrapper while keeping access clean inside the notebook.
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -252,5 +328,6 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╠═707c7498-dba7-4d20-8286-5778104df208
 # ╟─bdd2f924-402c-4858-bebb-72c5c20696c0
 # ╠═89fd640c-c649-4a06-8ce8-b0e40998ef9b
+# ╟─738b1f86-b58a-4411-8c6a-c8c61a2f52e4
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
